@@ -1,0 +1,9 @@
+ledcube Firmware 1.0
+
+Arduino compatible sourcecode for driving an 5x5x5 Ledcube.
+This Code is still under heavy developement!
+
+some of the functionality is based on the work of ajmontag.
+You can find his great Tutorial on instructables:
+
+http://www.instructables.com/id/LED-Cube-with-Arduino-and-custom-PCB/
