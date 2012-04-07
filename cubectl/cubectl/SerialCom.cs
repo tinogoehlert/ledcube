@@ -13,16 +13,14 @@ namespace cubectl
 	
 	public static class SerialCom
 	{
-		static SerialPort _port;
+		static SerialPort _port  = new SerialPort();
 		static string     _ident = string.Empty;
 		
 		
-		public SerialCom ()
+		static public void Init ()
 		{
 			if(SerialPort.GetPortNames().Length > 0)
 				_ident = SerialPort.GetPortNames()[0];
-			
-			
 		}
 	}
 }

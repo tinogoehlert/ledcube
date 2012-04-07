@@ -41,7 +41,7 @@
     <Reference Include="pango-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <Reference Include="NPlot.Gtk">
-      <HintPath>..\..\..\..\dev\libraries\csharp\nplot-gtk-0.9.9.2\bin\NPlot.Gtk.dll</HintPath>
+      <HintPath>..\contrib\NPlot.Gtk.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -62,6 +62,8 @@
     <Compile Include="gtk-gui\cubectl.widget_none.cs" />
     <Compile Include="widget_text.cs" />
     <Compile Include="gtk-gui\cubectl.widget_text.cs" />
+    <Compile Include="widget_sub_speed.cs" />
+    <Compile Include="gtk-gui\cubectl.widget_sub_speed.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

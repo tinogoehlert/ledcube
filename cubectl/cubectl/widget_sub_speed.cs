@@ -1,12 +1,11 @@
 using System;
-using Gtk;
 
 namespace cubectl
 {
 	[System.ComponentModel.ToolboxItem(true)]
-	public partial class widget_none : Gtk.Bin
+	public partial class widget_sub_speed : Gtk.Bin
 	{
-		public widget_none ()
+		public widget_sub_speed ()
 		{
 			this.Build ();
 		}
