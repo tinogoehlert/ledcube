@@ -7,7 +7,7 @@ namespace cubectl
 	{
 		public widget_sub_speed ()
 		{
-			this.Build ();
+			this.Build();
 		}
 	}
 }

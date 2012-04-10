@@ -64,6 +64,8 @@
     <Compile Include="gtk-gui\cubectl.widget_text.cs" />
     <Compile Include="widget_sub_speed.cs" />
     <Compile Include="gtk-gui\cubectl.widget_sub_speed.cs" />
+    <Compile Include="widget_console.cs" />
+    <Compile Include="gtk-gui\cubectl.widget_console.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

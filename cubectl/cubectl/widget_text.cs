@@ -8,6 +8,8 @@ namespace cubectl
 		public widget_text ()
 		{
 			this.Build ();
+			this.vbox1.PackEnd(widget_sound.Instance());
+			this.vbox1.ShowAll();
 		}
 	}
 }

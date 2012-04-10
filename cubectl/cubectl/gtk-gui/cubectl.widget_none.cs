@@ -4,12 +4,28 @@ namespace cubectl
 {
 	public partial class widget_none
 	{
+		private global::Gtk.VBox vbox1;
+		private global::Gtk.Image image5;
+		
 		protected virtual void Build ()
 		{
 			global::Stetic.Gui.Initialize (this);
 			// Widget cubectl.widget_none
 			global::Stetic.BinContainer.Attach (this);
 			this.Name = "cubectl.widget_none";
+			// Container child cubectl.widget_none.Gtk.Container+ContainerChild
+			this.vbox1 = new global::Gtk.VBox ();
+			this.vbox1.Name = "vbox1";
+			this.vbox1.Spacing = 6;
+			// Container child vbox1.Gtk.Box+BoxChild
+			this.image5 = new global::Gtk.Image ();
+			this.image5.Name = "image5";
+			this.vbox1.Add (this.image5);
+			global::Gtk.Box.BoxChild w1 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.image5]));
+			w1.Position = 0;
+			w1.Expand = false;
+			w1.Fill = false;
+			this.Add (this.vbox1);
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();
 			}

@@ -4,20 +4,17 @@
 public partial class MainWindow
 {
 	private global::Gtk.UIManager UIManager;
+	private global::Gtk.Action FileAction;
+	private global::Gtk.Action SerialPortsAction;
 	private global::Gtk.VBox vbox1;
 	private global::Gtk.MenuBar menubar1;
 	private global::Gtk.Notebook notebook1;
-	private global::Gtk.HBox hbox2;
+	private global::Gtk.HBox hbox_home;
 	private global::Gtk.ScrolledWindow GtkScrolledWindow;
-	private global::Gtk.TreeView treeview3;
+	private global::Gtk.TreeView home_treeview_effects;
 	private global::Gtk.Label label1;
 	private global::Gtk.Label label2;
-	private global::Gtk.VBox vbox2;
-	private global::Gtk.ScrolledWindow GtkScrolledWindow1;
-	private global::Gtk.TextView textview1;
-	private global::Gtk.HBox hbox3;
-	private global::Gtk.Button bt_console_send;
-	private global::Gtk.Entry entry1;
+	private global::cubectl.widget_console widget_console1;
 	private global::Gtk.Label label3;
 	private global::Gtk.Statusbar statusbar1;
 	
@@ -27,6 +24,12 @@ public partial class MainWindow
 		// Widget MainWindow
 		this.UIManager = new global::Gtk.UIManager ();
 		global::Gtk.ActionGroup w1 = new global::Gtk.ActionGroup ("Default");
+		this.FileAction = new global::Gtk.Action ("FileAction", global::Mono.Unix.Catalog.GetString ("File"), null, null);
+		this.FileAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("File");
+		w1.Add (this.FileAction, null);
+		this.SerialPortsAction = new global::Gtk.Action ("SerialPortsAction", global::Mono.Unix.Catalog.GetString ("Serial Ports"), null, null);
+		this.SerialPortsAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Serial Ports");
+		w1.Add (this.SerialPortsAction, null);
 		this.UIManager.InsertActionGroup (w1, 0);
 		this.AddAccelGroup (this.UIManager.AccelGroup);
 		this.Name = "MainWindow";
@@ -37,7 +40,8 @@ public partial class MainWindow
 		this.vbox1.Name = "vbox1";
 		this.vbox1.Spacing = 6;
 		// Container child vbox1.Gtk.Box+BoxChild
-		this.UIManager.AddUiFromString ("<ui><menubar name=\'menubar1\'/></ui>");
+		this.UIManager.AddUiFromString ("<ui><menubar name=\'menubar1\'><menu name=\'FileAction\' action=\'FileAction\'/><menu n" +
+				"ame=\'SerialPortsAction\' action=\'SerialPortsAction\'/></menubar></ui>");
 		this.menubar1 = ((global::Gtk.MenuBar)(this.UIManager.GetWidget ("/menubar1")));
 		this.menubar1.Name = "menubar1";
 		this.vbox1.Add (this.menubar1);
@@ -49,29 +53,29 @@ public partial class MainWindow
 		this.notebook1 = new global::Gtk.Notebook ();
 		this.notebook1.CanFocus = true;
 		this.notebook1.Name = "notebook1";
-		this.notebook1.CurrentPage = 0;
+		this.notebook1.CurrentPage = 2;
 		// Container child notebook1.Gtk.Notebook+NotebookChild
-		this.hbox2 = new global::Gtk.HBox ();
-		this.hbox2.Name = "hbox2";
-		this.hbox2.Spacing = 6;
-		// Container child hbox2.Gtk.Box+BoxChild
+		this.hbox_home = new global::Gtk.HBox ();
+		this.hbox_home.Name = "hbox_home";
+		this.hbox_home.Spacing = 6;
+		// Container child hbox_home.Gtk.Box+BoxChild
 		this.GtkScrolledWindow = new global::Gtk.ScrolledWindow ();
 		this.GtkScrolledWindow.Name = "GtkScrolledWindow";
 		this.GtkScrolledWindow.ShadowType = ((global::Gtk.ShadowType)(1));
 		// Container child GtkScrolledWindow.Gtk.Container+ContainerChild
-		this.treeview3 = new global::Gtk.TreeView ();
-		this.treeview3.CanFocus = true;
-		this.treeview3.Name = "treeview3";
-		this.GtkScrolledWindow.Add (this.treeview3);
-		this.hbox2.Add (this.GtkScrolledWindow);
-		global::Gtk.Box.BoxChild w4 = ((global::Gtk.Box.BoxChild)(this.hbox2 [this.GtkScrolledWindow]));
+		this.home_treeview_effects = new global::Gtk.TreeView ();
+		this.home_treeview_effects.CanFocus = true;
+		this.home_treeview_effects.Name = "home_treeview_effects";
+		this.GtkScrolledWindow.Add (this.home_treeview_effects);
+		this.hbox_home.Add (this.GtkScrolledWindow);
+		global::Gtk.Box.BoxChild w4 = ((global::Gtk.Box.BoxChild)(this.hbox_home [this.GtkScrolledWindow]));
 		w4.Position = 0;
-		this.notebook1.Add (this.hbox2);
+		this.notebook1.Add (this.hbox_home);
 		// Notebook tab
 		this.label1 = new global::Gtk.Label ();
 		this.label1.Name = "label1";
 		this.label1.LabelProp = global::Mono.Unix.Catalog.GetString ("home");
-		this.notebook1.SetTabLabel (this.hbox2, this.label1);
+		this.notebook1.SetTabLabel (this.hbox_home, this.label1);
 		this.label1.ShowAll ();
 		// Notebook tab
 		global::Gtk.Label w6 = new global::Gtk.Label ();
@@ -83,92 +87,39 @@ public partial class MainWindow
 		this.notebook1.SetTabLabel (w6, this.label2);
 		this.label2.ShowAll ();
 		// Container child notebook1.Gtk.Notebook+NotebookChild
-		this.vbox2 = new global::Gtk.VBox ();
-		this.vbox2.Spacing = 6;
-		// Container child vbox2.Gtk.Box+BoxChild
-		this.GtkScrolledWindow1 = new global::Gtk.ScrolledWindow ();
-		this.GtkScrolledWindow1.Name = "GtkScrolledWindow1";
-		this.GtkScrolledWindow1.ShadowType = ((global::Gtk.ShadowType)(1));
-		// Container child GtkScrolledWindow1.Gtk.Container+ContainerChild
-		this.textview1 = new global::Gtk.TextView ();
-		this.textview1.CanFocus = true;
-		this.textview1.Name = "textview1";
-		this.GtkScrolledWindow1.Add (this.textview1);
-		this.vbox2.Add (this.GtkScrolledWindow1);
-		global::Gtk.Box.BoxChild w8 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.GtkScrolledWindow1]));
-		w8.Position = 0;
-		// Container child vbox2.Gtk.Box+BoxChild
-		this.hbox3 = new global::Gtk.HBox ();
-		this.hbox3.Name = "hbox3";
-		this.hbox3.Spacing = 6;
-		// Container child hbox3.Gtk.Box+BoxChild
-		this.bt_console_send = new global::Gtk.Button ();
-		this.bt_console_send.CanFocus = true;
-		this.bt_console_send.Name = "bt_console_send";
-		this.bt_console_send.UseUnderline = true;
-		// Container child bt_console_send.Gtk.Container+ContainerChild
-		global::Gtk.Alignment w9 = new global::Gtk.Alignment (0.5F, 0.5F, 0F, 0F);
-		// Container child GtkAlignment.Gtk.Container+ContainerChild
-		global::Gtk.HBox w10 = new global::Gtk.HBox ();
-		w10.Spacing = 2;
-		// Container child GtkHBox.Gtk.Container+ContainerChild
-		global::Gtk.Image w11 = new global::Gtk.Image ();
-		w11.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-yes", global::Gtk.IconSize.Button);
-		w10.Add (w11);
-		// Container child GtkHBox.Gtk.Container+ContainerChild
-		global::Gtk.Label w13 = new global::Gtk.Label ();
-		w13.LabelProp = global::Mono.Unix.Catalog.GetString ("Senden");
-		w13.UseUnderline = true;
-		w10.Add (w13);
-		w9.Add (w10);
-		this.bt_console_send.Add (w9);
-		this.hbox3.Add (this.bt_console_send);
-		global::Gtk.Box.BoxChild w17 = ((global::Gtk.Box.BoxChild)(this.hbox3 [this.bt_console_send]));
-		w17.Position = 0;
-		w17.Expand = false;
-		w17.Fill = false;
-		// Container child hbox3.Gtk.Box+BoxChild
-		this.entry1 = new global::Gtk.Entry ();
-		this.entry1.CanFocus = true;
-		this.entry1.Name = "entry1";
-		this.entry1.IsEditable = true;
-		this.entry1.InvisibleChar = '●';
-		this.hbox3.Add (this.entry1);
-		global::Gtk.Box.BoxChild w18 = ((global::Gtk.Box.BoxChild)(this.hbox3 [this.entry1]));
-		w18.Position = 1;
-		this.vbox2.Add (this.hbox3);
-		global::Gtk.Box.BoxChild w19 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.hbox3]));
-		w19.Position = 1;
-		w19.Expand = false;
-		w19.Fill = false;
-		this.notebook1.Add (this.vbox2);
-		global::Gtk.Notebook.NotebookChild w20 = ((global::Gtk.Notebook.NotebookChild)(this.notebook1 [this.vbox2]));
-		w20.Position = 2;
+		this.widget_console1 = new global::cubectl.widget_console ();
+		this.widget_console1.Events = ((global::Gdk.EventMask)(256));
+		this.widget_console1.Name = "widget_console1";
+		this.notebook1.Add (this.widget_console1);
+		global::Gtk.Notebook.NotebookChild w7 = ((global::Gtk.Notebook.NotebookChild)(this.notebook1 [this.widget_console1]));
+		w7.Position = 2;
 		// Notebook tab
 		this.label3 = new global::Gtk.Label ();
 		this.label3.Name = "label3";
 		this.label3.LabelProp = global::Mono.Unix.Catalog.GetString ("console");
-		this.notebook1.SetTabLabel (this.vbox2, this.label3);
+		this.notebook1.SetTabLabel (this.widget_console1, this.label3);
 		this.label3.ShowAll ();
 		this.vbox1.Add (this.notebook1);
-		global::Gtk.Box.BoxChild w21 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.notebook1]));
-		w21.Position = 1;
+		global::Gtk.Box.BoxChild w8 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.notebook1]));
+		w8.Position = 1;
 		// Container child vbox1.Gtk.Box+BoxChild
 		this.statusbar1 = new global::Gtk.Statusbar ();
 		this.statusbar1.Name = "statusbar1";
 		this.statusbar1.Spacing = 6;
 		this.vbox1.Add (this.statusbar1);
-		global::Gtk.Box.BoxChild w22 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.statusbar1]));
-		w22.Position = 2;
-		w22.Expand = false;
-		w22.Fill = false;
+		global::Gtk.Box.BoxChild w9 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.statusbar1]));
+		w9.Position = 2;
+		w9.Expand = false;
+		w9.Fill = false;
 		this.Add (this.vbox1);
 		if ((this.Child != null)) {
 			this.Child.ShowAll ();
 		}
-		this.DefaultWidth = 400;
+		this.DefaultWidth = 439;
 		this.DefaultHeight = 300;
 		this.Show ();
 		this.DeleteEvent += new global::Gtk.DeleteEventHandler (this.OnDeleteEvent);
+		this.SerialPortsAction.Activated += new global::System.EventHandler (this.OnSerialPortsActionActivated);
+		this.home_treeview_effects.CursorChanged += new global::System.EventHandler (this.OnHomeTreeviewEffectsCursorChanged);
 	}
 }

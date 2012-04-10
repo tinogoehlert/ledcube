@@ -106,7 +106,7 @@ namespace cubectl
 			w15.Add (w16);
 			// Container child GtkHBox.Gtk.Container+ContainerChild
 			global::Gtk.Label w18 = new global::Gtk.Label ();
-			w18.LabelProp = global::Mono.Unix.Catalog.GetString ("Load");
+			w18.LabelProp = global::Mono.Unix.Catalog.GetString ("Load from ROM");
 			w18.UseUnderline = true;
 			w15.Add (w18);
 			w14.Add (w15);
