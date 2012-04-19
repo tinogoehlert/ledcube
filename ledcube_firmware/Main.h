@@ -11,6 +11,7 @@
 #include "ledcube.h"
 #include "TimerOne.h"
 #include "Effect.h"
+#include "fixfft.h"
 
 //end of add your includes here
 #ifdef __cplusplus

@@ -51,6 +51,7 @@ public:
 	void bounce();
 	void custom(byte* data);
 	void rand();
+	void music();
 	void debug(byte number, byte z);
 	void debug(byte x, byte y, byte z);
 	void bubbles();
@@ -64,6 +65,10 @@ private:
 	byte		 _mod;
 	byte		 _frame;
 	byte		 _framecount;
+	/// special audio stuff
+	void getmic();
+	void fft_generate();
+	char _fft_img[128],_fft_data[128],_fft_last[64];
 };
 
 extern Effect Effect1;

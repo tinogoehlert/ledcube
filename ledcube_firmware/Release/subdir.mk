@@ -8,6 +8,7 @@ CPP_SRCS += \
 ../LedSquare.cpp \
 ../Main.cpp \
 ../TimerOne.cpp \
+../fixfft.cpp \
 ../ledcube.cpp 
 
 OBJS += \
@@ -15,6 +16,7 @@ OBJS += \
 ./LedSquare.o \
 ./Main.o \
 ./TimerOne.o \
+./fixfft.o \
 ./ledcube.o 
 
 CPP_DEPS += \
@@ -22,6 +24,7 @@ CPP_DEPS += \
 ./LedSquare.d \
 ./Main.d \
 ./TimerOne.d \
+./fixfft.d \
 ./ledcube.d 
 
 

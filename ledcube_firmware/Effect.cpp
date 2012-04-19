@@ -28,6 +28,7 @@ along with ledcube_firm Source Code.  If not, see <http://www.gnu.org/licenses/>
 #include "bitmaps.h"
 #include "LedCube.h"
 #include "LedSquare.h"
+#include "fixfft.h"
 
 byte anim_rotate[4][5] = {
 		{2,2,2,2,2},
@@ -120,12 +121,16 @@ void Effect::renderfunc_slide(uint32_t matrix)
 {
 	byte i = 0,z=4;
 		for(;i<CUBESIZE;i++,z--){
-			byte x=CUBESIZE;
-			while(x>0){
-				if(BIT(matrix,((x-1)+(i*CUBESIZE))) == 1)
-					LedCube::setpixel((x-1),_frame,z);
-				x--;
-			}
+			if(BIT(matrix,(0+(i*CUBESIZE))) == 1)
+				LedCube::setpixel(4,_frame,z);
+			if(BIT(matrix,(1+(i*CUBESIZE))) == 1)
+				LedCube::setpixel(3,_frame,z);
+			if(BIT(matrix,(2+(i*CUBESIZE))) == 1)
+				LedCube::setpixel(2,_frame,z);
+			if(BIT(matrix,(3+(i*CUBESIZE))) == 1)
+				LedCube::setpixel(1,_frame,z);
+			if(BIT(matrix,(4+(i*CUBESIZE))) == 1)
+				LedCube::setpixel(0,_frame,z);
 		}
 }
 
@@ -250,10 +255,10 @@ void Effect::custom(byte* data)
 
 void Effect::infinitesquare()
 {
+	unsigned int milli = this->_milli + 1;
 	unsigned long t = millis();
 	int i;
-	for(i = 0; true ;t = millis(), i++){
-		unsigned int milli = this->_milli + 1;
+	for(i = 0; i < LEDS_PER_ROW+2 ;t = millis(), i++){
 	    while(millis() < t + milli){
 	    	LedSquare::displaycenter(((i+2)%LEDS_PER_ROW));
 	    	LedSquare::displaysmall(((i+1)%LEDS_PER_ROW));
@@ -262,7 +267,34 @@ void Effect::infinitesquare()
 	}
 }
 
+void Effect::music()
+{
+	int i = 1,y=0,z=0,bar[25],avg;
 
+	unsigned int milli = 10 + 1;
+	unsigned long t = millis();
+
+	getmic();
+	fft_generate();
+
+	for(int i = 1; i < 64 ;t = millis(), i++,z++){
+		for(avg = 0;avg<2;avg++){
+			bar[z] += _fft_last[i++];
+		}
+
+		if((bar[z] /= 2) > 4) bar[z] = 4;
+	}
+
+	while(millis() < t + milli){
+		for(y = 0;y<LEDS_PER_ROW;y++){
+			for(i = 0;i<LEDS_PER_ROW;i++){
+				for(z = 0;z<bar[i];z++){
+					LedCube::setpixel(i,y,z);
+				}
+			}
+		}
+	}
+}
 
 void Effect::bounce()
 {
@@ -304,4 +336,27 @@ void Effect::bubbles()
 				delay(this->_milli/2);
 	}
 	delay(this->_milli);
+}
+
+////// AUDIO PROCESSING
+
+void Effect::getmic()
+{
+	int i=0,val;
+	for(i=0; i < 128; i++){
+		val = analogRead(0);
+		_fft_data[i] = val/4 -128;
+		_fft_img[i] = 0;
+	 };
+}
+
+void Effect::fft_generate()
+{
+    fix_fft(_fft_data,_fft_img,7,0);
+
+    for (int i=1; i< 64;i++){
+    	_fft_data[i] = sqrt(_fft_data[i] * _fft_data[i] + _fft_img[i] * _fft_img[i]);
+	    _fft_last[i] = _fft_data[i];
+    };
+
 }

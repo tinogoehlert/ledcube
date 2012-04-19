@@ -10,7 +10,7 @@ Effect.d Effect.o: ../Effect.cpp ../Effect.h \
   C:\apps\devel\arduino-1.0\hardware\arduino\cores\arduino/new.h \
   C:\apps\devel\arduino-1.0\hardware\arduino\variants\eightanaloginputs/pins_arduino.h \
   C:\apps\devel\arduino-1.0\hardware\arduino\variants\eightanaloginputs/../standard/pins_arduino.h \
-  ../bitmaps.h ../LedCube.h ../LedSquare.h
+  ../bitmaps.h ../LedCube.h ../LedSquare.h ../fixfft.h
 
 ../Effect.h:
 
@@ -41,3 +41,5 @@ C:\apps\devel\arduino-1.0\hardware\arduino\variants\eightanaloginputs/../standar
 ../LedCube.h:
 
 ../LedSquare.h:
+
+../fixfft.h:

@@ -26,7 +26,7 @@ along with ledcube_firm Source Code.  If not, see <http://www.gnu.org/licenses/>
 #include "ledcube.h"
 
 
-#define MICRO 30
+#define MICRO 50000
 
 unsigned int decoderPins[] = {p0, p1, p2, p3, p4};
 unsigned int cathodePins[] = {Z0, Z1, Z2, Z3, Z4};

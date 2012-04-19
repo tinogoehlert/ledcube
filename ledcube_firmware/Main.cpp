@@ -40,24 +40,48 @@ struct command_s{
 	byte   len;
 	char*  buf;
 }g_command;
+char g_buff[64];
 
-char g_buff[32];
+byte bt_state = 0xF0,bt_val = 0, bt_save = 0;
+
+void proc_vars()
+{
+    bt_val = digitalRead(A1);
+    if(bt_save != bt_val && bt_val == LOW){
+    	if(bt_state == 0xF6) bt_state = 0xF0;
+    	else bt_state++;
+
+    	g_command.cmd = bt_state;
+    }
+
+    bt_save = bt_val;
+}
 
 void setup() {
-	g_command.mod = MOD_ROTATE;
-	g_command.cmd = CMD_HEART;
+	g_command.mod = MOD_SLIDE;
+	g_command.cmd = CMD_TEXT;
 
 	Serial.begin(9600);
+	Serial.write("LED CUBE rev. 1\r\n");
+	analogReference(DEFAULT);
+
+	pinMode(A1, INPUT);
+
 	LedCube::init();
 
-	Effect1.setspeed(150);
+	Effect1.setspeed(120);
 	Effect1.setmod(g_command.mod);
+
+	g_command.buf = g_buff+3;
+
 	strcpy(g_command.buf,"RALPH");
 	g_command.len = strlen(g_command.buf);
 }
 
+
 void fetchdata()
 {
+
 	int i = 0;
 	for(;Serial.available() > 0 && i<32;i++) {
 		g_buff[i] = Serial.read();
@@ -67,8 +91,11 @@ void fetchdata()
 		g_command.cmd = g_buff[0];
 		g_command.mod = g_buff[1];
 		g_command.len = g_buff[2];
-		g_command.buf = g_buff+3;
+		strcpy(g_command.buf,g_buff+3);
 	}
+
+	proc_vars();
+
 }
 
 
@@ -80,7 +107,7 @@ void loop() {
 		Effect1.drawstring(g_command.buf,g_command.len);
 		break;
 	case CMD_HEART:
-		Effect1.heartbeat();
+		Effect1.music();
 		break;
 	case CMD_SMILE:
 		Effect1.smiley();
@@ -89,10 +116,10 @@ void loop() {
 		Effect1.bubbles();
 		break;
 	case CMD_BOUNCE:
-		Effect1.bounce();
+		Effect1.infinitesquare();
 		break;
 	case CMD_INFINITE:
-		Effect1.infinitesquare();
+		Effect1.bounce();
 		break;
 	case CMD_DEBUG:
 		if(g_command.mod == MOD_DBG_COORD)
@@ -103,4 +130,5 @@ void loop() {
 			Effect1.debug((byte)g_command.buf[0],(byte)g_command.buf[0]);
 		break;
 	}
+
 }

@@ -1,4 +1,4 @@
-Main.d Main.o: ../Main.cpp ../Main.h \
+fixfft.d fixfft.o: ../fixfft.cpp ../fixfft.h \
   C:\apps\devel\arduino-1.0\hardware\arduino\cores\arduino/Arduino.h \
   C:\apps\devel\arduino-1.0\hardware\arduino\cores\arduino/binary.h \
   C:\apps\devel\arduino-1.0\hardware\arduino\cores\arduino/WCharacter.h \
@@ -9,10 +9,9 @@ Main.d Main.o: ../Main.cpp ../Main.h \
   C:\apps\devel\arduino-1.0\hardware\arduino\cores\arduino/Printable.h \
   C:\apps\devel\arduino-1.0\hardware\arduino\cores\arduino/new.h \
   C:\apps\devel\arduino-1.0\hardware\arduino\variants\eightanaloginputs/pins_arduino.h \
-  C:\apps\devel\arduino-1.0\hardware\arduino\variants\eightanaloginputs/../standard/pins_arduino.h \
-  ../ledcube.h ../TimerOne.h ../Effect.h ../fixfft.h
+  C:\apps\devel\arduino-1.0\hardware\arduino\variants\eightanaloginputs/../standard/pins_arduino.h
 
-../Main.h:
+../fixfft.h:
 
 C:\apps\devel\arduino-1.0\hardware\arduino\cores\arduino/Arduino.h:
 
@@ -35,11 +34,3 @@ C:\apps\devel\arduino-1.0\hardware\arduino\cores\arduino/new.h:
 C:\apps\devel\arduino-1.0\hardware\arduino\variants\eightanaloginputs/pins_arduino.h:
 
 C:\apps\devel\arduino-1.0\hardware\arduino\variants\eightanaloginputs/../standard/pins_arduino.h:
-
-../ledcube.h:
-
-../TimerOne.h:
-
-../Effect.h:
-
-../fixfft.h:
