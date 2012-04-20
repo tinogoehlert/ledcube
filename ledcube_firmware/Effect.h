@@ -65,6 +65,7 @@ private:
 	byte		 _mod;
 	byte		 _frame;
 	byte		 _framecount;
+	unsigned int _infiniteval;
 	/// special audio stuff
 	void getmic();
 	void fft_generate();

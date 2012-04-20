@@ -26,12 +26,14 @@ along with ledcube_firm Source Code.  If not, see <http://www.gnu.org/licenses/>
 
 enum command_e{
 	CMD_TEXT    	= 0xF0,
-	CMD_HEART   	= 0xF1,
-	CMD_SMILE   	= 0xF2,
-	CMD_BUBBLES 	= 0xF3,
-	CMD_BOUNCE  	= 0xF4,
-	CMD_INFINITE 	= 0xF5,
-	CMD_DEBUG 		= 0xF6
+	CMD_S04    		= 0xF1,
+	CMD_MUSIC    	= 0xF2,
+	CMD_HEART   	= 0xF3,
+	CMD_SMILE   	= 0xF4,
+	CMD_BUBBLES 	= 0xF5,
+	CMD_BOUNCE  	= 0xF6,
+	CMD_INFINITE 	= 0xF7,
+	CMD_DEBUG 		= 0xF8
 };
 
 struct command_s{
@@ -48,7 +50,7 @@ void proc_vars()
 {
     bt_val = digitalRead(A1);
     if(bt_save != bt_val && bt_val == LOW){
-    	if(bt_state == 0xF6) bt_state = 0xF0;
+    	if(bt_state > 0xF7) bt_state = 0xF0;
     	else bt_state++;
 
     	g_command.cmd = bt_state;
@@ -106,8 +108,14 @@ void loop() {
 	case CMD_TEXT:
 		Effect1.drawstring(g_command.buf,g_command.len);
 		break;
-	case CMD_HEART:
+	case CMD_S04:
+		Effect1.drawstring("S04",3);
+		break;
+	case CMD_MUSIC:
 		Effect1.music();
+		break;
+	case CMD_HEART:
+		Effect1.heartbeat();
 		break;
 	case CMD_SMILE:
 		Effect1.smiley();

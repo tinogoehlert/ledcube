@@ -40,7 +40,8 @@ byte anim_rotate[4][5] = {
 Effect Effect1;
 
 Effect::Effect() {
-	this->_milli  = 100;
+	this->_milli  	    = 100;
+	this->_infiniteval  = 0;
 }
 
 Effect::~Effect() {
@@ -257,13 +258,14 @@ void Effect::infinitesquare()
 {
 	unsigned int milli = this->_milli + 1;
 	unsigned long t = millis();
-	int i;
-	for(i = 0; i < LEDS_PER_ROW+2 ;t = millis(), i++){
-	    while(millis() < t + milli){
-	    	LedSquare::displaycenter(((i+2)%LEDS_PER_ROW));
-	    	LedSquare::displaysmall(((i+1)%LEDS_PER_ROW));
-	    	LedSquare::displaybig(((i  )%LEDS_PER_ROW));
-	    }
+	int i = 0;
+	for(i = 0; i < CUBESIZE; t = millis(), i++, _infiniteval++){
+		while(millis() < t + milli){
+			LedSquare::displaycenter(((_infiniteval+2)%LEDS_PER_ROW));
+			LedSquare::displaysmall(((_infiniteval+1)%LEDS_PER_ROW));
+			LedSquare::displaybig(((_infiniteval  )%LEDS_PER_ROW));
+
+		}
 	}
 }
 
@@ -271,7 +273,7 @@ void Effect::music()
 {
 	int i = 1,y=0,z=0,bar[25],avg;
 
-	unsigned int milli = 10 + 1;
+	unsigned int milli = 10;
 	unsigned long t = millis();
 
 	getmic();
@@ -282,7 +284,7 @@ void Effect::music()
 			bar[z] += _fft_last[i++];
 		}
 
-		if((bar[z] /= 2) > 4) bar[z] = 4;
+		if((bar[z] /= 2) > 5) bar[z] = 5;
 	}
 
 	while(millis() < t + milli){
